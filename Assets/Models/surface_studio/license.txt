@@ -1,0 +1,8 @@
+Model Information:
+* title:	Surface Studio
+* source:	https://sketchfab.com/3d-models/surface-studio-20dcbe8880b24fad8fa3448096079401
+* author:	NoXiou5 (https://sketchfab.com/NoXiou5)
+
+Model License:
+* license type:	SKETCHFAB Standard (https://sketchfab.com/licenses)
+* requirements:	Under basic restrictions, use worldwide, on all types of media, commercially or not, and in all types of derivative works
