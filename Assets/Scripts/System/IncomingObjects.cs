@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class IncomingObjects : MonoBehaviour
 {
+    //Variables
+    [SerializeField] protected List<GameObject> objects;
+    [HideInInspector] public GameObject actualObject;
+
     // Start is called before the first frame update
     void Start()
     {
