@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class GameManager : MonoBehaviour
     [Header("Game System Variables")]
     [SerializeField] private float timeToNextObject;
     [SerializeField] private int points;
+    [SerializeField] private Objects[] objects;
     [HideInInspector] public int answers;
     [HideInInspector] private float totalTime;
     [HideInInspector] private bool gameStarded;
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
     }
 }
 
+[System.Serializable]
 class Objects
 {
     public string Name;
