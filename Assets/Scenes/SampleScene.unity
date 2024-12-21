@@ -15584,7 +15584,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.02e-43, y: 1e-45, z: 3.5725e-41, w: 0}
+  m_BoundingSphereOverride: {x: 7.55458e+31, y: 0, z: 0, w: NaN}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -17314,11 +17314,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPlaceHolder: {fileID: 964732758}
-  objectAnimator: {fileID: 0}
+  objectAnimator: {fileID: 964732760}
   leftText: {fileID: 2140340435}
   rightText: {fileID: 1287722008}
   leftButton: {fileID: 1497293865}
   rightButton: {fileID: 1767394135}
+  gameManager: {fileID: 0}
   leftPressed: 0
   rightPressed: 0
 --- !u!114 &2063438973
@@ -17348,7 +17349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fda00f9374e857747bbdf960a2388202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToNextObject: 0
+  timeToNextObject: 4
   points: 0
   objects:
   - Name: C++

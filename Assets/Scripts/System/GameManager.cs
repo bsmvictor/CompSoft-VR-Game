@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -8,8 +9,9 @@ public class GameManager : MonoBehaviour
     //Variables
     [Header("Game System Variables")]
     [SerializeField] private float timeToNextObject;
+    [SerializeField] private float timeChangingObject;
     [SerializeField] private int points;
-    [SerializeField] private Objects[] objects;
+    [SerializeField] public QuizObject[] objects;
     [HideInInspector] public int answers;
     [HideInInspector] private float totalTime;
     [HideInInspector] private bool gameStarded;
@@ -35,26 +37,14 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(gameStarded) //Only happens when press StartGame() button
+        if (gameStarded) //Only happens when press StartGame() button
         {
-            //If left or right button pressed = go to Anim_Object_Fade animation
-
-            if (panelOptions.leftPressed)
-                objectAnimator.SetInteger("transition", 2);
-
-            else if (panelOptions.rightPressed)
-                objectAnimator.SetInteger("transition", 2);
-
-            //objectAnimator.SetInteger("transition", 1);
-
-            //Setting everythin to false for next object
-
-            panelOptions.leftPressed = false;
-            panelOptions.rightPressed = false;
+            StartCoroutine(GameStarted());
         }
+            
     }
 
-    public void StarGame()
+    void StarGame()
     {
         if (!gameStarded)
         {
@@ -69,10 +59,40 @@ public class GameManager : MonoBehaviour
             objectAnimator.SetInteger("transition", 1); //Start Anim_Object_Comming animation
         }
     }
+
+    IEnumerator GameStarted()
+    {
+        //First Sorting Panel
+        panelOptions.SortingPanel();
+
+        // Waiting for player to choose
+        yield return new WaitForSeconds(timeToNextObject);
+        //If left or right button pressed = go to Anim_Object_Fade animation
+        if (panelOptions.leftPressed)
+        {
+            if (panelOptions.CorrectOption()) points++;
+            objectAnimator.SetInteger("transition", 2);
+        }
+
+        else if (panelOptions.rightPressed)
+        {
+            if (panelOptions.CorrectOption()) points++;
+            objectAnimator.SetInteger("transition", 2);
+        }
+
+        yield return new WaitForSeconds(1);
+
+        objectAnimator.SetInteger("transition", 1);
+
+        //Setting everythin to false for next object
+        panelOptions.leftPressed = false;
+        panelOptions.rightPressed = false;
+    }
+    
 }
 
 [System.Serializable]
-class Objects
+public class QuizObject
 {
     public string Name;
     public GameObject Object;
