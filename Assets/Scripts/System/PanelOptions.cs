@@ -44,6 +44,7 @@ public class PanelOptions : MonoBehaviour
         int panelSide = Random.Range(0, 1);
         int selectedObject = Random.Range(0, objects.Length);
         int randomObject = Random.Range(0, objects.Length);
+        objects[selectedObject].Object.SetActive(true);
         if (panelSide == 0) //Left button is correct
         {
             leftText.text = objects[selectedObject].Name;

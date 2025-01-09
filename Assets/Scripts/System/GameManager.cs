@@ -37,14 +37,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameStarded) //Only happens when press StartGame() button
-        {
-            StartCoroutine(GameStarted());
-        }
             
     }
 
-    void StarGame()
+    public void StarGame()
     {
         if (!gameStarded)
         {
@@ -57,11 +53,19 @@ public class GameManager : MonoBehaviour
             gameStarded = true;
 
             objectAnimator.SetInteger("transition", 1); //Start Anim_Object_Comming animation
+
+            StartCoroutine(GameStarted());
         }
     }
 
     IEnumerator GameStarted()
     {
+        //Deactivating all objects first
+        for (int i = 0; i < objects.Length; i++)
+        {
+            objects[i].Object.SetActive(false);
+        }
+
         //First Sorting Panel
         panelOptions.SortingPanel();
 
@@ -87,6 +91,8 @@ public class GameManager : MonoBehaviour
         //Setting everythin to false for next object
         panelOptions.leftPressed = false;
         panelOptions.rightPressed = false;
+
+        StartCoroutine(GameStarted());
     }
     
 }

@@ -15,9 +15,6 @@ MonoBehaviour:
   features:
   - {fileID: 4812648681134222133}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -308,9 +305,6 @@ MonoBehaviour:
   - {fileID: 2316775424616146661}
   - {fileID: -5611916350011621528}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -756,9 +750,6 @@ MonoBehaviour:
   features:
   - {fileID: 5898133034378865027}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -780,11 +771,11 @@ MonoBehaviour:
   - {fileID: -1276894210230670667}
   - {fileID: 5047315830286589360}
   - {fileID: 6504682016904032715}
+  - {fileID: 3260563429725945975}
   - {fileID: 5007098057516315081}
   - {fileID: 1727173055597128861}
   - {fileID: -8732650259347650135}
   - {fileID: 5482083253204040886}
-  - {fileID: 6450083618903582613}
   - {fileID: 4025793028449617705}
   - {fileID: 1641826089876749333}
   - {fileID: 4799142765814640469}
@@ -798,11 +789,7 @@ MonoBehaviour:
   - {fileID: 4135229692886101830}
   - {fileID: 2220871646205782247}
   - {fileID: -3969011046571012784}
-  - {fileID: 3260563429725945975}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -984,7 +971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4710975c7840e7d499bbb3757c22b0a5, type: 3}
   m_Name: MetaXRSubsampledLayout Android
   m_EditorClassIdentifier: 
-  m_enabled: 0
+  m_enabled: 1
   nameUi: Meta XR Subsampled Layout
   version: 0.0.1
   featureIdInternal: com.meta.openxr.feature.subsampledLayout
@@ -1123,10 +1110,10 @@ MonoBehaviour:
   - {fileID: 3554264124859437666}
   - {fileID: 8968387473496227895}
   - {fileID: -7492839480718335507}
+  - {fileID: -3109756821326932100}
   - {fileID: 9020184986697725232}
   - {fileID: 3078549452214307779}
   - {fileID: 7497383018830012468}
-  - {fileID: -6340369244919140758}
   - {fileID: 7223869130901287869}
   - {fileID: -5539130401960464476}
   - {fileID: -1956434229424714331}
@@ -1140,11 +1127,7 @@ MonoBehaviour:
   - {fileID: -6368128839055358620}
   - {fileID: -7581625304019661375}
   - {fileID: 48485915226374437}
-  - {fileID: -3109756821326932100}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -1988,10 +1971,10 @@ MonoBehaviour:
   - {fileID: -6713703209410741996}
   - {fileID: 1234343159088925624}
   - {fileID: 8272930284400874479}
+  - {fileID: -1897244956704876865}
   - {fileID: 2408986369446631460}
   - {fileID: 1197223584764669677}
   - {fileID: 3624060167071051966}
-  - {fileID: -5398819057986642010}
   - {fileID: 1842053253761892022}
   - {fileID: 6607511961599091113}
   - {fileID: 7297813295984840450}
@@ -2000,11 +1983,7 @@ MonoBehaviour:
   - {fileID: -2454097070331497040}
   - {fileID: 8965774261333153462}
   - {fileID: 6778343106804274004}
-  - {fileID: -1897244956704876865}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
