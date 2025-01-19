@@ -1,6 +1,7 @@
 using Meta.XR.ImmersiveDebugger.UserInterface.Generic;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -14,6 +15,8 @@ public class PanelOptions : MonoBehaviour
     [SerializeField] private Animator objectAnimator;
     [SerializeField] private Text leftText;
     [SerializeField] private Text rightText;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text pointsText;
     [SerializeField] private UnityEngine.UI.Button leftButton;
     [SerializeField] private UnityEngine.UI.Button rightButton;
 
@@ -38,10 +41,16 @@ public class PanelOptions : MonoBehaviour
         rightPressed = false;
     }
 
+    private void Update()
+    {
+        timerText.text = gameManager.roundTime.ToString("F0");
+        pointsText.text = gameManager.points.ToString();
+    }
+
     //Sorting panel every new object
     public void SortingPanel()
     {
-        int panelSide = Random.Range(0, 1);
+        int panelSide = Random.Range(0, 2);
         int selectedObject = Random.Range(0, objects.Length);
         int randomObject = Random.Range(0, objects.Length);
         objects[selectedObject].Object.SetActive(true);
@@ -59,8 +68,18 @@ public class PanelOptions : MonoBehaviour
             rightText.text = objects[selectedObject].Name;
             correctAnswer = rightText.text;
         }
-        else if (selectedObject == randomObject)
-            SortingPanel();
+        else if (selectedObject == randomObject) SortingPanel();
+        
+        //Solving the problem that sometimes both answers are the same
+        if (leftText.text == rightText.text) SortingPanel();
+    }
+
+    public void EndGamePanel() //When timer gets 0
+    {
+        leftText.text = "";
+        correctAnswer = null;
+        objectPlaceHolder = null;
+        rightText.text = "";
     }
 
     public bool CorrectOption()

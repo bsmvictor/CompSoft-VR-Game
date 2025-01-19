@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     [Header("Game System Variables")]
     [SerializeField] private float timeToNextObject;
     [SerializeField] private float timeChangingObject;
-    [SerializeField] private int points;
+    [SerializeField] public float roundTime;
+    [SerializeField] public int points;
     [SerializeField] public QuizObject[] objects;
     [HideInInspector] public int answers;
     [HideInInspector] private float totalTime;
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] protected IncomingObjects incomingObjects;
     [SerializeField] protected PanelOptions panelOptions;
 
+    bool answered = false;
 
     // Start is called before the first frame update
     void Start()
@@ -32,12 +34,29 @@ public class GameManager : MonoBehaviour
         panelOptions = GetComponent<PanelOptions>();
 
         gameStarded = false; //Component starts false
+        answered = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-            
+        if (gameStarded)
+        {
+            roundTime -= Time.deltaTime;
+            if (roundTime <= 0)
+            {
+                roundTime = 0;
+                gameStarded = false;
+                panelOptions.EndGamePanel();
+                objectAnimator.SetInteger("transition", 0);
+            }
+            if (answered) GameStarted();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        
     }
 
     public void StarGame()
@@ -47,6 +66,7 @@ public class GameManager : MonoBehaviour
             //Starting game with reseted parameters
             answers = 0;
             points = 0;
+            roundTime = 60;
 
             panelOptions.leftPressed = false;
             panelOptions.rightPressed = false;
@@ -54,12 +74,15 @@ public class GameManager : MonoBehaviour
 
             objectAnimator.SetInteger("transition", 1); //Start Anim_Object_Comming animation
 
-            StartCoroutine(GameStarted());
+            GameStarted();
         }
     }
 
-    IEnumerator GameStarted()
+    public void GameStarted()
     {
+        answered = false;
+        objectAnimator.SetInteger("transition", 1);//Comming object animation
+
         //Deactivating all objects first
         for (int i = 0; i < objects.Length; i++)
         {
@@ -70,7 +93,7 @@ public class GameManager : MonoBehaviour
         panelOptions.SortingPanel();
 
         // Waiting for player to choose
-        yield return new WaitForSeconds(timeToNextObject);
+        //yield return new WaitForSeconds(timeToNextObject);
         //If left or right button pressed = go to Anim_Object_Fade animation
         if (panelOptions.leftPressed)
         {
@@ -84,15 +107,11 @@ public class GameManager : MonoBehaviour
             objectAnimator.SetInteger("transition", 2);
         }
 
-        yield return new WaitForSeconds(1);
-
-        objectAnimator.SetInteger("transition", 1);
-
         //Setting everythin to false for next object
         panelOptions.leftPressed = false;
         panelOptions.rightPressed = false;
 
-        StartCoroutine(GameStarted());
+        answered = true;
     }
     
 }
