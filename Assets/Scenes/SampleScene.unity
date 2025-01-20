@@ -24847,7 +24847,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 5.63e-43, y: 7.1e-44, z: 0, w: 8.987154e-36}
+  m_BoundingSphereOverride: {x: 5.969307e-39, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -28308,6 +28308,9 @@ MonoBehaviour:
   pointsText: {fileID: 0}
   leftButton: {fileID: 1497293865}
   rightButton: {fileID: 1767394135}
+  correctColor: {r: 0, g: 1, b: 0.018627405, a: 1}
+  wrongColor: {r: 1, g: 0, b: 0, a: 1}
+  defaultColor: {r: 1, g: 1, b: 1, a: 1}
   gameManager: {fileID: 0}
   leftPressed: 0
   rightPressed: 0
@@ -28340,6 +28343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeToNextObject: 4
   timeChangingObject: 0
+  roundTime: 60
   points: 0
   objects:
   - Name: C++
@@ -28366,7 +28370,6 @@ MonoBehaviour:
     Object: {fileID: 1022609465}
   - Name: Arduino
     Object: {fileID: 2054528143}
-  roundTime: 60
   answers: 0
   objectPlaceHolder: {fileID: 964732758}
   objectAnimator: {fileID: 964732760}

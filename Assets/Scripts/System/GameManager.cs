@@ -25,7 +25,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] protected IncomingObjects incomingObjects;
     [SerializeField] protected PanelOptions panelOptions;
 
+    //Tick Control
+    public class OnTickEventArgs: EventArgs
+    {
+        public int tick;
+    }
+    public static event EventHandler<OnTickEventArgs> OnTick;
+    private const float TICK_TIMER_MAX = 5f;
+    private int tick;
+    private float tickTimer;
+
     bool answered = false;
+
+    private void Awake()
+    {
+        tick = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +65,17 @@ public class GameManager : MonoBehaviour
                 panelOptions.EndGamePanel();
                 objectAnimator.SetInteger("transition", 0);
             }
-            if (answered) GameStarted();
+            tickTimer += Time.deltaTime;
+            if(tickTimer >= TICK_TIMER_MAX)
+            {
+                tickTimer -= TICK_TIMER_MAX;
+                tick++;
+                if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
+                GameStarted();
+            }
+            Answer();
         }
+
     }
 
     private void FixedUpdate()
@@ -93,7 +117,10 @@ public class GameManager : MonoBehaviour
         panelOptions.SortingPanel();
 
         // Waiting for player to choose
-        //yield return new WaitForSeconds(timeToNextObject);
+    }
+
+    public void Answer()
+    {
         //If left or right button pressed = go to Anim_Object_Fade animation
         if (panelOptions.leftPressed)
         {
@@ -106,6 +133,7 @@ public class GameManager : MonoBehaviour
             if (panelOptions.CorrectOption()) points++;
             objectAnimator.SetInteger("transition", 2);
         }
+
 
         //Setting everythin to false for next object
         panelOptions.leftPressed = false;

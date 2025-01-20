@@ -19,6 +19,7 @@ public class PanelOptions : MonoBehaviour
     [SerializeField] private TMP_Text pointsText;
     [SerializeField] private UnityEngine.UI.Button leftButton;
     [SerializeField] private UnityEngine.UI.Button rightButton;
+    [SerializeField] public Color correctColor, wrongColor, defaultColor;
 
     [Header("Scripts")]
     [SerializeField] private GameManager gameManager;
@@ -50,10 +51,16 @@ public class PanelOptions : MonoBehaviour
     //Sorting panel every new object
     public void SortingPanel()
     {
+        //Generating Objects and Answers
         int panelSide = Random.Range(0, 2);
         int selectedObject = Random.Range(0, objects.Length);
         int randomObject = Random.Range(0, objects.Length);
         objects[selectedObject].Object.SetActive(true);
+
+        //Setting default button colors
+        leftButton.image.color = defaultColor;
+        rightButton.image.color = defaultColor;
+
         if (panelSide == 0) //Left button is correct
         {
             leftText.text = objects[selectedObject].Name;
@@ -84,11 +91,27 @@ public class PanelOptions : MonoBehaviour
 
     public bool CorrectOption()
     {
-        if(leftText.text == correctAnswer && leftPressed) return true;
-        else if(leftText.text != correctAnswer && leftPressed) return false;
+        if (leftText.text == correctAnswer && leftPressed)
+        {
+            leftButton.image.color = correctColor;
+            return true;
+        }
+        else if (leftText.text != correctAnswer && leftPressed)
+        {
+            leftButton.image.color = wrongColor;
+            return false;
+        }
 
-        else if(rightText.text == correctAnswer && rightPressed) return true;
-        else return false;
+        else if (rightText.text == correctAnswer && rightPressed)
+        {
+            rightButton.image.color = correctColor;
+            return true;
+        }
+        else
+        {
+            rightButton.image.color = wrongColor;
+            return false;
+        }
     }
 
     public void LeftButton()
