@@ -12,7 +12,7 @@ namespace LeaderboardCreatorDemo
         [SerializeField] private TMP_Text[] _entryRank;
         [SerializeField] private TMP_Text[] _entryScore;
         [SerializeField] private TMP_Text[] _entryName;
-        [SerializeField] private TMP_InputField _usernameInputField;
+        [SerializeField] private string _usernameInputField;
 
         // Make changes to this section according to how you're storing the player's score:
         // ------------------------------------------------------------
@@ -24,6 +24,12 @@ namespace LeaderboardCreatorDemo
         {
             Score = FindObjectOfType<GameManager>().points;
             LoadEntries();
+        }
+
+        private void Update()
+        {
+            Score = FindObjectOfType<GameManager>().points;
+            _usernameInputField = VirtualKeyboard.inputText;
         }
 
         private void LoadEntries()
@@ -55,7 +61,7 @@ namespace LeaderboardCreatorDemo
 
         public void UploadEntry()
         {
-            Leaderboards.CompSoftLeaderboard.UploadNewEntry(_usernameInputField.text, Score, isSuccessful =>
+            Leaderboards.CompSoftLeaderboard.UploadNewEntry(_usernameInputField, Score, isSuccessful =>
             {
                 if (isSuccessful)
                     LoadEntries();

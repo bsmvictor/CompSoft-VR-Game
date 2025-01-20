@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [Header("Components and GameObjects")]
     [SerializeField] private GameObject objectPlaceHolder;
     [SerializeField] private Animator objectAnimator;
+    [SerializeField] private VirtualKeyboard virtualKeyboard;
 
     [Header("Scripts")]
     [SerializeField] protected IncomingObjects incomingObjects;
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
             {
                 roundTime = 0;
                 gameStarded = false;
+                virtualKeyboard.OpenKeyboard(); //Open keyboard to insert name
                 panelOptions.EndGamePanel();
                 objectAnimator.SetInteger("transition", 0);
             }
@@ -87,6 +89,7 @@ public class GameManager : MonoBehaviour
 
     public void StarGame()
     {
+        Leaderboards.CompSoftLeaderboard.UploadNewEntry(VirtualKeyboard.inputText, points); //Sending data to leaderboard
         if (!gameStarded)
         {
             //Starting game with reseted parameters
