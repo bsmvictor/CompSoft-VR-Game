@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class VirtualKeyboard : MonoBehaviour
 {
+    [SerializeField] private Leaderboard leaderboard;
     private TouchScreenKeyboard overlayKeyboard;
     public static string inputText = "";
 
@@ -20,6 +21,7 @@ public class VirtualKeyboard : MonoBehaviour
         if (overlayKeyboard != null)
         {
             inputText = overlayKeyboard.text;
+            leaderboard.UploadEntry();
         }
     }
 

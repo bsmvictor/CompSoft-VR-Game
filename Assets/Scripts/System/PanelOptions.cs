@@ -17,6 +17,7 @@ public class PanelOptions : MonoBehaviour
     [SerializeField] private Text rightText;
     [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text pointsText;
+    [SerializeField] private TMP_Text startGameText;
     [SerializeField] private UnityEngine.UI.Button leftButton;
     [SerializeField] private UnityEngine.UI.Button rightButton;
     [SerializeField] public Color correctColor, wrongColor, defaultColor;
@@ -46,6 +47,9 @@ public class PanelOptions : MonoBehaviour
     {
         timerText.text = gameManager.roundTime.ToString("F0");
         pointsText.text = gameManager.points.ToString();
+
+        if(gameManager.gameStarded)
+            startGameText.enabled = false;
     }
 
     //Sorting panel every new object
@@ -83,6 +87,7 @@ public class PanelOptions : MonoBehaviour
 
     public void EndGamePanel() //When timer gets 0
     {
+        startGameText.enabled = true;
         leftText.text = "";
         correctAnswer = null;
         objectPlaceHolder = null;

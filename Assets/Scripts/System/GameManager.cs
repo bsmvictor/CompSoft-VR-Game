@@ -1,5 +1,4 @@
 using Dan.Main;
-using LeaderboardCreatorDemo;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] public QuizObject[] objects;
     [HideInInspector] public int answers;
     [HideInInspector] private float totalTime;
-    [HideInInspector] private bool gameStarded;
+    [HideInInspector] public bool gameStarded;
+    [SerializeField] private Leaderboard leaderboard;
 
     [Header("Components and GameObjects")]
     [SerializeField] private GameObject objectPlaceHolder;
@@ -68,6 +68,8 @@ public class GameManager : MonoBehaviour
                 virtualKeyboard.OpenKeyboard(); //Open keyboard to insert name
                 panelOptions.EndGamePanel();
                 objectAnimator.SetInteger("transition", 0);
+                leaderboard.UploadEntry();
+                leaderboard.LoadEntries();
             }
             tickTimer += Time.deltaTime;
             if(tickTimer >= TICK_TIMER_MAX)
@@ -89,7 +91,7 @@ public class GameManager : MonoBehaviour
 
     public void StarGame()
     {
-        Leaderboards.CompSoftLeaderboard.UploadNewEntry(VirtualKeyboard.inputText, points); //Sending data to leaderboard
+        leaderboard.UploadEntry();
         if (!gameStarded)
         {
             //Starting game with reseted parameters
@@ -105,12 +107,19 @@ public class GameManager : MonoBehaviour
 
             GameStarted();
         }
+        leaderboard.LoadEntries();
     }
 
     public void GameStarted()
     {
         answered = false;
         objectAnimator.SetInteger("transition", 1);//Comming object animation
+
+        //Deactivating all objects first
+        for (int i = 0; i < objects.Length; i++)
+        {
+            objects[i].Object.SetActive(false);
+        }
 
         //Deactivating all objects first
         for (int i = 0; i < objects.Length; i++)
