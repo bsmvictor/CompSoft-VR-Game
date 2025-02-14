@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector] private float totalTime;
     [HideInInspector] public bool gameStarded;
     [SerializeField] private Leaderboard leaderboard;
+    [SerializeField] private AudioSource audioSource;
 
     [Header("Components and GameObjects")]
     [SerializeField] private GameObject objectPlaceHolder;
@@ -70,6 +71,7 @@ public class GameManager : MonoBehaviour
                 objectAnimator.SetInteger("transition", 0);
                 leaderboard.UploadEntry();
                 leaderboard.LoadEntries();
+                audioSource.Stop(); //Stopping music when round ends
             }
             tickTimer += Time.deltaTime;
             if(tickTimer >= TICK_TIMER_MAX)
@@ -97,7 +99,7 @@ public class GameManager : MonoBehaviour
             //Starting game with reseted parameters
             answers = 0;
             points = 0;
-            roundTime = 60;
+            roundTime = 150;
 
             panelOptions.leftPressed = false;
             panelOptions.rightPressed = false;
@@ -129,6 +131,8 @@ public class GameManager : MonoBehaviour
 
         //First Sorting Panel
         panelOptions.SortingPanel();
+
+        audioSource.Play(); // Playing music
 
         // Waiting for player to choose
     }
