@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
             points = 0;
             roundTime = 150;
 
+            audioSource.Play(); // Playing music
+
             panelOptions.leftPressed = false;
             panelOptions.rightPressed = false;
             gameStarded = true;
@@ -131,8 +133,6 @@ public class GameManager : MonoBehaviour
 
         //First Sorting Panel
         panelOptions.SortingPanel();
-
-        audioSource.Play(); // Playing music
 
         // Waiting for player to choose
     }
