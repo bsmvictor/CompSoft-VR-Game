@@ -1671,7 +1671,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3fca24a8f97254934ac35c1864531d8f, type: 2}
     - target: {fileID: -9022712623808512102, guid: 835f81307f17f3f418906316bc9b1bbb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8944085659782712091, guid: 835f81307f17f3f418906316bc9b1bbb, type: 3}
       propertyPath: m_IsActive
@@ -3029,26 +3029,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71dd4d0c552dfd44bb84876035ac05c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entryRank:
-  - {fileID: 829960671}
-  - {fileID: 1120892759}
-  - {fileID: 1197904924}
-  - {fileID: 782255270}
-  - {fileID: 394442712}
-  _entryScore:
-  - {fileID: 1848751970}
-  - {fileID: 559979981}
-  - {fileID: 878275974}
-  - {fileID: 116978096}
-  - {fileID: 94953516}
-  _entryName:
-  - {fileID: 137661011}
-  - {fileID: 830141222}
-  - {fileID: 1808758949}
-  - {fileID: 748583656}
-  - {fileID: 410404690}
-  _usernameInputField: 
-  Score: 0
 --- !u!1 &201924236
 GameObject:
   m_ObjectHideFlags: 0
@@ -9885,7 +9865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c6984c48aed9a154294088f4265d8478, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9912,6 +9892,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c6984c48aed9a154294088f4265d8478, type: 3}
       insertIndex: -1
       addedObject: {fileID: 807051356}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: c6984c48aed9a154294088f4265d8478, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 807051357}
   m_SourcePrefab: {fileID: 100100000, guid: c6984c48aed9a154294088f4265d8478, type: 3}
 --- !u!4 &807051348 stripped
 Transform:
@@ -10148,6 +10131,18 @@ MonoBehaviour:
   m_MinAngleAllowed: 0.1
   m_MaxAngleAllowed: 5
   m_TimeUntilThresholdReachesMaxAngle: 3
+--- !u!114 &807051357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807051350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7cac50f01ba5254688729b3f97312e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &817075155
 GameObject:
   m_ObjectHideFlags: 0
@@ -12294,6 +12289,10 @@ PrefabInstance:
       propertyPath: AnimationCurve.m_Curve.Array.data[1].outWeight
       value: 0.07739902
       objectReference: {fileID: 0}
+    - target: {fileID: 7053394279983507675, guid: c4a645c929982ea41a52b5037ee7d94d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3fca24a8f97254934ac35c1864531d8f, type: 2}
     - target: {fileID: 8134302614855669005, guid: c4a645c929982ea41a52b5037ee7d94d, type: 3}
       propertyPath: m_Name
       value: Teleport Anchor
@@ -12986,7 +12985,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 84e14d131e46d244daefb9546fafe8de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -13951,7 +13950,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7cac50f01ba5254688729b3f97312e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leaderboard: {fileID: 198904343}
 --- !u!4 &1235366106
 Transform:
   m_ObjectHideFlags: 0
@@ -17272,10 +17270,10 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8072890477496077224, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 198904342}
+      addedObject: {fileID: 104513288}
     - targetCorrespondingSourceObject: {fileID: 8072890477496077224, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 104513288}
+      addedObject: {fileID: 198904342}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 085ce58b196caa446a8545c9dd388793, type: 3}
 --- !u!1 &1563663614
@@ -19290,7 +19288,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 84e14d131e46d244daefb9546fafe8de, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -20137,7 +20135,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 1e-45, z: 1.02e-43, w: 3e-45}
+  m_BoundingSphereOverride: {x: 0, y: 1.6590125e-36, z: 1e-45, w: 0}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -22328,7 +22326,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2063438975}
   - component: {fileID: 2063438974}
-  - component: {fileID: 2063438973}
   - component: {fileID: 2063438972}
   m_Layer: 0
   m_Name: Game Manager
@@ -22364,21 +22361,6 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   leftPressed: 0
   rightPressed: 0
---- !u!114 &2063438973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063438971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b73a800fb6a6199418ad8f433e233627, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objects:
-  - {fileID: 0}
-  actualObject: {fileID: 0}
 --- !u!114 &2063438974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22470,12 +22452,10 @@ MonoBehaviour:
     Object: {fileID: 1805482418}
   answers: 0
   gameStarded: 0
-  leaderboard: {fileID: 198904343}
   audioSource: {fileID: 48292031}
   objectPlaceHolder: {fileID: 964732758}
   objectAnimator: {fileID: 964732760}
   virtualKeyboard: {fileID: 1235366105}
-  incomingObjects: {fileID: 0}
   panelOptions: {fileID: 0}
 --- !u!4 &2063438975
 Transform:

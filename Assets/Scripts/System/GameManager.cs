@@ -1,8 +1,6 @@
-using Dan.Main;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,8 +15,12 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int answers;
     [HideInInspector] private float totalTime;
     [HideInInspector] public bool gameStarded;
-    [SerializeField] private Leaderboard leaderboard;
     [SerializeField] private AudioSource audioSource;
+
+    [Header("Scoring System")]
+    [SerializeField] private float maxTimeForBonus = 3f; // Tempo máximo para ganhar bônus (reduzido de 5 para 3)
+    [SerializeField] private int basePoints = 5; // Pontos base por resposta correta (reduzido de 10 para 5)
+    [SerializeField] private int maxBonusPoints = 20; // Pontos máximos de bônus (reduzido de 50 para 20)
 
     [Header("Components and GameObjects")]
     [SerializeField] private GameObject objectPlaceHolder;
@@ -26,11 +28,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private VirtualKeyboard virtualKeyboard;
 
     [Header("Scripts")]
-    [SerializeField] protected IncomingObjects incomingObjects;
     [SerializeField] protected PanelOptions panelOptions;
 
     //Tick Control
-    public class OnTickEventArgs: EventArgs
+    public class OnTickEventArgs : EventArgs
     {
         public int tick;
     }
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     private int tick;
     private float tickTimer;
 
+    private float questionStartTime; // Tempo quando a pergunta foi exibida
     bool answered = false;
 
     private void Awake()
@@ -46,17 +48,13 @@ public class GameManager : MonoBehaviour
         tick = 0;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        incomingObjects = GetComponent<IncomingObjects>();
         panelOptions = GetComponent<PanelOptions>();
-
-        gameStarded = false; //Component starts false
+        gameStarded = false;
         answered = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gameStarded)
@@ -66,100 +64,102 @@ public class GameManager : MonoBehaviour
             {
                 roundTime = 0;
                 gameStarded = false;
-                virtualKeyboard.OpenKeyboard(); //Open keyboard to insert name
+                virtualKeyboard.OpenKeyboard();
                 panelOptions.EndGamePanel();
                 objectAnimator.SetInteger("transition", 0);
-                leaderboard.UploadEntry();
-                leaderboard.LoadEntries();
-                audioSource.Stop(); //Stopping music when round ends
+                audioSource.Stop();
             }
+
             tickTimer += Time.deltaTime;
-            if(tickTimer >= TICK_TIMER_MAX)
+            if (tickTimer >= TICK_TIMER_MAX)
             {
                 tickTimer -= TICK_TIMER_MAX;
                 tick++;
                 if (OnTick != null) OnTick(this, new OnTickEventArgs { tick = tick });
                 GameStarted();
             }
+
             Answer();
         }
-
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
     public void StarGame()
     {
-        leaderboard.UploadEntry();
         if (!gameStarded)
         {
-            //Starting game with reseted parameters
             answers = 0;
             points = 0;
-            roundTime = 150;
-
-            audioSource.Play(); // Playing music
-
+            roundTime = 60;
+            audioSource.Play();
             panelOptions.leftPressed = false;
             panelOptions.rightPressed = false;
             gameStarded = true;
-
-            objectAnimator.SetInteger("transition", 1); //Start Anim_Object_Comming animation
-
+            objectAnimator.SetInteger("transition", 1);
             GameStarted();
         }
-        leaderboard.LoadEntries();
     }
 
     public void GameStarted()
     {
         answered = false;
-        objectAnimator.SetInteger("transition", 1);//Comming object animation
+        objectAnimator.SetInteger("transition", 1);
 
-        //Deactivating all objects first
+        // Registrar o tempo quando a nova pergunta é exibida
+        questionStartTime = Time.time;
+
+        //Desativar todos os objetos primeiro
         for (int i = 0; i < objects.Length; i++)
         {
             objects[i].Object.SetActive(false);
         }
 
-        //Deactivating all objects first
-        for (int i = 0; i < objects.Length; i++)
-        {
-            objects[i].Object.SetActive(false);
-        }
-
-        //First Sorting Panel
+        //Primeira organização do painel
         panelOptions.SortingPanel();
-
-        // Waiting for player to choose
     }
 
     public void Answer()
     {
-        //If left or right button pressed = go to Anim_Object_Fade animation
-        if (panelOptions.leftPressed)
+        if (answered) return;
+
+        //Se botão esquerdo ou direito pressionado = ir para animação Anim_Object_Fade
+        if (panelOptions.leftPressed || panelOptions.rightPressed)
         {
-            if (panelOptions.CorrectOption()) points++;
+            if (panelOptions.CorrectOption())
+            {
+                // Calcular tempo de resposta
+                float responseTime = Time.time - questionStartTime;
+
+                // Calcular pontos com bônus por velocidade
+                int earnedPoints = CalculatePointsBasedOnResponseTime(responseTime);
+                points += earnedPoints;
+
+                Debug.Log($"Resposta correta em {responseTime:F2}s! Pontos ganhos: {earnedPoints}");
+            }
+
             objectAnimator.SetInteger("transition", 2);
+
+            //Resetar tudo para o próximo objeto
+            panelOptions.leftPressed = false;
+            panelOptions.rightPressed = false;
+            answered = true;
+            answers++;
         }
-
-        else if (panelOptions.rightPressed)
-        {
-            if (panelOptions.CorrectOption()) points++;
-            objectAnimator.SetInteger("transition", 2);
-        }
-
-
-        //Setting everythin to false for next object
-        panelOptions.leftPressed = false;
-        panelOptions.rightPressed = false;
-
-        answered = true;
     }
-    
+
+    private int CalculatePointsBasedOnResponseTime(float responseTime)
+    {
+        // Se respondeu depois do tempo máximo, ganha apenas os pontos base
+        if (responseTime > maxTimeForBonus)
+        {
+            return basePoints;
+        }
+
+        // Calcula o bônus proporcional ao tempo de resposta
+        float timeRatio = 1 - (responseTime / maxTimeForBonus);
+        int bonusPoints = Mathf.RoundToInt(timeRatio * maxBonusPoints);
+
+        return basePoints + bonusPoints;
+    }
 }
 
 [System.Serializable]
